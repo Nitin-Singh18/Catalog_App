@@ -4,8 +4,7 @@ import 'package:firstapp/utility/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  // ignore: prefer_const_constructors
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

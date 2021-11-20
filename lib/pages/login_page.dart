@@ -1,13 +1,33 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'dart:async';
+
 import 'package:firstapp/pages/home.dart';
 import 'package:firstapp/utility/routes.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class loginPage extends StatelessWidget {
+class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
 
+  @override
+  State<loginPage> createState() => _loginPageState();
+}
+
+class _loginPageState extends State<loginPage> {
+  void loading() {
+    setState(() {
+      isloading = true;
+    });
+    Timer(Duration(seconds: 2), () {
+      setState(() {
+        isloading = false;
+      });
+      Navigator.pushNamed(context, MyRoutes.homeRoute);
+    });
+  }
+
+  bool isloading = false;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -73,25 +93,44 @@ class loginPage extends StatelessWidget {
             //       color: Colors.white,
             //       fontSize: 22),
             // ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, MyRoutes.homeRoute);
-              },
-              child: Container(
-                width: 100,
-                height: 40,
-                alignment: Alignment.center,
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                    color: Colors.deepOrange,
-                    borderRadius: BorderRadius.circular(8)),
-              ),
-            )
+            isloading
+                ? Container(
+                    alignment: Alignment.center,
+                    width: 100,
+                    height: 40,
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.blue,
+                    ),
+                  )
+                : InkWell(
+                    onTap: () {
+                      loading();
+                      // Navigator.pushNamed(context, MyRoutes.homeRoute);
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: RichText(
+                        text: TextSpan(children: [TextSpan(text: "L")]),
+                      ),
+                      // Text(
+                      //   "Login",
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     color: Colors.white,
+                      //   ),
+                      // ),
+                      decoration: BoxDecoration(
+                          // color: Colors.deepOrange,
+                          gradient: LinearGradient(colors: [
+                            Colors.blue,
+                            Colors.pink,
+                            Colors.yellow
+                          ]),
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                  )
 
             // ElevatedButton(
             //   child: Text("Sign in"),
