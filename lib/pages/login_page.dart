@@ -73,12 +73,32 @@ class loginPage extends StatelessWidget {
             //       color: Colors.white,
             //       fontSize: 22),
             // ),
-            ElevatedButton(
-              child: Text("Sign in"),
-              onPressed: () {
+            InkWell(
+              onTap: () {
                 Navigator.pushNamed(context, MyRoutes.homeRoute);
               },
+              child: Container(
+                width: 100,
+                height: 40,
+                alignment: Alignment.center,
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.deepOrange,
+                    borderRadius: BorderRadius.circular(8)),
+              ),
             )
+
+            // ElevatedButton(
+            //   child: Text("Sign in"),
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, MyRoutes.homeRoute);
+            //   },
+            // )
           ],
         ),
       ),
