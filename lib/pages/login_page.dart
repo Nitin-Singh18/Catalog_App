@@ -16,16 +16,20 @@ class loginPage extends StatefulWidget {
 
 class _loginPageState extends State<loginPage> {
   void loading() {
-    setState(() {
-      isloading = true;
-    });
-    Timer(Duration(seconds: 2), () {
+    if (_formKey.currentState!.validate()) {
       setState(() {
-        isloading = false;
+        isloading = true;
       });
-      Navigator.pushNamed(context, MyRoutes.homeRoute);
-    });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isloading = false;
+        });
+        Navigator.pushNamed(context, MyRoutes.homeRoute);
+      });
+    }
   }
+
+  final _formKey = GlobalKey<FormState>();
 
   bool isloading = false;
   @override
@@ -41,104 +45,120 @@ class _loginPageState extends State<loginPage> {
       // ),
       color: Colors.white,
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              "Assets/image/login_image.png",
-              fit: BoxFit.cover,
-              scale: 1,
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Text(
-              "Login",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.lightBlue[900],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Image.asset(
+                "Assets/image/login_image.png",
+                fit: BoxFit.cover,
+                scale: 1,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                        labelText: "Username", hintText: "Enter username"),
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        labelText: "Password", hintText: "Password"),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                ],
+              SizedBox(
+                height: 40,
               ),
-            ),
-            Text(
-              "Forget Password?",
-              style: TextStyle(color: Colors.orange, fontSize: 12),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            // Text(
-            //   " Next ",
-            //   textAlign: TextAlign.start,
-            //   style: TextStyle(
-            //       backgroundColor: Colors.indigo[900],
-            //       color: Colors.white,
-            //       fontSize: 22),
-            // ),
-            isloading
-                ? Container(
-                    alignment: Alignment.center,
-                    width: 100,
-                    height: 40,
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.blue,
+              Text(
+                "Login",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightBlue[900],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Username", hintText: "Enter username"),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ("Enter your username");
+                        }
+                        return null;
+                      },
                     ),
-                  )
-                : InkWell(
-                    onTap: () {
-                      loading();
-                      // Navigator.pushNamed(context, MyRoutes.homeRoute);
-                    },
-                    child: Container(
+                    TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          labelText: "Password", hintText: "Password"),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ("Enter your password");
+                        } else if (value.length < 8) {
+                          return ("Enter password with lenght of 8 or more");
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                "Forget Password?",
+                style: TextStyle(color: Colors.orange, fontSize: 12),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              // Text(
+              //   " Next ",
+              //   textAlign: TextAlign.start,
+              //   style: TextStyle(
+              //       backgroundColor: Colors.indigo[900],
+              //       color: Colors.white,
+              //       fontSize: 22),
+              // ),
+              isloading
+                  ? Container(
+                      alignment: Alignment.center,
                       width: 100,
                       height: 40,
-                      alignment: Alignment.center,
-                      child: RichText(
-                        text: TextSpan(children: [TextSpan(text: "L")]),
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.blue,
                       ),
-                      // Text(
-                      //   "Login",
-                      //   style: TextStyle(
-                      //     fontWeight: FontWeight.bold,
-                      //     color: Colors.white,
-                      //   ),
-                      // ),
-                      decoration: BoxDecoration(
-                          // color: Colors.deepOrange,
-                          gradient: LinearGradient(colors: [
-                            Colors.blue,
-                            Colors.pink,
-                            Colors.yellow
-                          ]),
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                  )
+                    )
+                  : InkWell(
+                      onTap: () {
+                        loading();
+                        // Navigator.pushNamed(context, MyRoutes.homeRoute);
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 40,
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                            // color: Colors.deepOrange,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            gradient: LinearGradient(colors: [
+                              Colors.blue,
+                              Colors.pink,
+                              Colors.yellow
+                            ]),
+                            borderRadius: BorderRadius.circular(8)),
+                      ),
+                    )
 
-            // ElevatedButton(
-            //   child: Text("Sign in"),
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, MyRoutes.homeRoute);
-            //   },
-            // )
-          ],
+              // ElevatedButton(
+              //   child: Text("Sign in"),
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, MyRoutes.homeRoute);
+              //   },
+              // )
+            ],
+          ),
         ),
       ),
     );

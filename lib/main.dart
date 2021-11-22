@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: avoid_unnecessary_containers, prefer_const_constructors
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         // ignore: prefer_const_constructors
         // home: HomePage(),
         themeMode: ThemeMode.light,
