@@ -31,15 +31,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       // ignore: prefer_const_constructors
-      drawer: Drawer(
-        elevation: 16,
-        // ignore: prefer_const_constructors
-
-        child: Text(
-          "second",
-          textAlign: TextAlign.center,
-        ),
-      ),
+      drawer: Drawer(),
     );
   }
 }
