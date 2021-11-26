@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firstapp/pages/home.dart';
 import 'package:firstapp/pages/login_page.dart';
 import 'package:firstapp/utility/routes.dart';
@@ -15,10 +17,19 @@ class MyApp extends StatelessWidget {
     // ignore: avoid_unnecessary_containers, prefer_const_constructors
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        // ignore: prefer_const_constructors
         // home: HomePage(),
         themeMode: ThemeMode.light,
-        theme: ThemeData(primarySwatch: Colors.deepOrange),
+        theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
+          appBarTheme: AppBarTheme(
+            color: Colors.white,
+            elevation: 0.0,
+            iconTheme: IconThemeData(color: Colors.black),
+            toolbarTextStyle: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        ),
         darkTheme: ThemeData(brightness: Brightness.dark),
         initialRoute: MyRoutes.homeRoute,
         routes: {
