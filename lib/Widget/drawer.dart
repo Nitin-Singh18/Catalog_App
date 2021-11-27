@@ -76,7 +76,7 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 240,
+            height: 300,
           ),
           ListTile(
             minVerticalPadding: 20,
