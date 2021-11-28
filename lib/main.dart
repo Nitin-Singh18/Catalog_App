@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: avoid_unnecessary_containers, prefer_const_constructors
+    // ignore: avoid_unnecessary_containers,
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         // home: HomePage(),
