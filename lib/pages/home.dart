@@ -1,10 +1,11 @@
 import 'package:firstapp/Widget/drawer.dart';
+import 'package:firstapp/Widget/home_widgets/catalog_widget.dart';
 import 'dart:convert';
 import 'package:firstapp/models/homecontent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'home_widgets/catalog_widget.dart';
+// import 'home_widgets/catalog_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
