@@ -28,7 +28,9 @@ class HomeDetailPage extends StatelessWidget {
               )
             ]),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.indigo.shade50,
+      ),
       backgroundColor: Colors.indigo.shade50,
       body: SafeArea(
         bottom: false,
@@ -63,6 +65,17 @@ class HomeDetailPage extends StatelessWidget {
                         catalog.desc,
                         style: TextStyle(color: Colors.black, fontSize: 15),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black45,
+                            fontSize: 13,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
