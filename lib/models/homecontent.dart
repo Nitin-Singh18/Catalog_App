@@ -1,3 +1,27 @@
+class CatalogModel {
+  static final catModel = CatalogModel._internal();
+
+  CatalogModel._internal();
+
+  factory CatalogModel() => catModel;
+  static List<Item> items = [
+    Item(
+        id: 1,
+        name: "iPhone 12",
+        desc: "Smartphone with amazing features",
+        price: 60000,
+        color: "blue",
+        image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRISJ6msIu4AU9_M9ZnJVQVFmfuhfyJjEtbUm3ZK11_8IV9TV25-1uM5wHjiFNwKy99w0mR5Hk&usqp=CAc"),
+  ];
+  // Get Item by ID
+  Item getById(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
+
+  // Get Item by position
+  Item getByPosition(int pos) => items[pos];
+}
+
 class Item {
   final int id;
   final String name;
@@ -31,17 +55,4 @@ class Item {
         "color": color,
         "imageUrl": image,
       };
-}
-
-class CatalogModel {
-  static List<Item> items = [
-    Item(
-        id: 1,
-        name: "iPhone 12",
-        desc: "Smartphone with amazing features",
-        price: 60000,
-        color: "blue",
-        image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRISJ6msIu4AU9_M9ZnJVQVFmfuhfyJjEtbUm3ZK11_8IV9TV25-1uM5wHjiFNwKy99w0mR5Hk&usqp=CAc"),
-  ];
 }

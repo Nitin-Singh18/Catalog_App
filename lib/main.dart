@@ -15,11 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: avoid_unnecessary_containers,
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        // home: HomePage(),
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.system,
         theme: ThemeData(
           primarySwatch: Colors.deepOrange,
           appBarTheme: AppBarTheme(
@@ -31,7 +29,19 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        darkTheme: ThemeData(brightness: Brightness.dark),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          cardColor: Colors.black87,
+          canvasColor: Colors.yellow.shade100,
+          appBarTheme: AppBarTheme(
+            color: Colors.black,
+            elevation: 0.0,
+            iconTheme: IconThemeData(color: Colors.black),
+            toolbarTextStyle: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        ),
         initialRoute: MyRoutes.homeRoute,
         routes: {
           "/": (context) => loginPage(),

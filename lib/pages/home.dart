@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.yellow[30],
+        // backgroundColor: Theme.of(context).canvasColor,
         floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.blue.shade900,
             onPressed: () {
