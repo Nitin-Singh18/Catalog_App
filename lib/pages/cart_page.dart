@@ -83,16 +83,30 @@ class __CartListState extends State<_CartList> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _cart.items.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.done),
-        trailing: IconButton(
-          icon: Icon(Icons.remove_circle_outline),
-          onPressed: () {},
-        ),
-        title: Text("${_cart.items[index].name}"),
-      ),
-    );
+    return _cart.items.isEmpty
+        ? Padding(
+            padding: const EdgeInsets.only(top: 100.0),
+            child: Center(
+              child: Text(
+                "Nothing added yet",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+          )
+        : ListView.builder(
+            itemCount: _cart.items.length,
+            itemBuilder: (context, index) => ListTile(
+              leading: Icon(Icons.done),
+              trailing: IconButton(
+                icon: Icon(Icons.remove_circle_outline),
+                // to remove item from cart list  -> use this
+                onPressed: () {
+                  _cart.remove(_cart.items[index]);
+                  setState(() {});
+                },
+              ),
+              title: Text("${_cart.items[index].name}"),
+            ),
+          );
   }
 }
