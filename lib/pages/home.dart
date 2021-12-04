@@ -1,8 +1,6 @@
-import 'package:firstapp/Widget/drawer.dart';
 import 'package:firstapp/Widget/home_widgets/catalog_widget.dart';
 import 'dart:convert';
 import 'package:firstapp/models/homecontent.dart';
-import 'package:firstapp/pages/cart_page.dart';
 import 'package:firstapp/utility/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

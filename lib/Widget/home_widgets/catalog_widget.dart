@@ -1,5 +1,4 @@
 import 'package:firstapp/models/homecontent.dart';
-import 'package:firstapp/pages/home.dart';
 import 'package:firstapp/pages/home_detail_page.dart';
 import 'package:flutter/material.dart';
 

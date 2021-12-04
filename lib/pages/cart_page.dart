@@ -1,3 +1,4 @@
+import 'package:firstapp/core/store.dart';
 import 'package:firstapp/models/cart_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _cartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    final CartModel _cart = (VxState.store as MyStore).cart;
 
     return SizedBox(
       height: 200,
@@ -48,9 +49,14 @@ class _cartTotal extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "\$${_cart.totalPrice}",
-              style: TextStyle(fontSize: 25),
+            VxBuilder(
+              mutations: {RemoveMutation},
+              builder: (context, store, status) {
+                return Text(
+                  "\$${_cart.totalPrice}",
+                  style: TextStyle(fontSize: 25),
+                );
+              },
             ),
             WidthBox(230),
             ElevatedButton(
@@ -72,20 +78,14 @@ class _cartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({Key? key}) : super(key: key);
-
-  @override
-  __CartListState createState() => __CartListState();
-}
-
-class __CartListState extends State<_CartList> {
-  final _cart = CartModel();
+class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
+    final CartModel _cart = (VxState.store as MyStore).cart;
     return _cart.items.isEmpty
-        ? Padding(
-            padding: const EdgeInsets.only(top: 100.0),
+        ? const Padding(
+            padding: EdgeInsets.only(top: 100.0),
             child: Center(
               child: Text(
                 "Nothing added yet",
@@ -101,8 +101,8 @@ class __CartListState extends State<_CartList> {
                 icon: Icon(Icons.remove_circle_outline),
                 // to remove item from cart list  -> use this
                 onPressed: () {
-                  _cart.remove(_cart.items[index]);
-                  setState(() {});
+                  RemoveMutation(_cart.items[index]);
+                  // setState(() {});
                 },
               ),
               title: Text("${_cart.items[index].name}"),

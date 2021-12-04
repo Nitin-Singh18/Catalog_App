@@ -1,5 +1,4 @@
 import 'package:firstapp/Widget/home_widgets/add_to_cart.dart';
-import 'package:firstapp/models/cart_model.dart';
 import 'package:firstapp/models/homecontent.dart';
 import 'package:flutter/material.dart';
 
