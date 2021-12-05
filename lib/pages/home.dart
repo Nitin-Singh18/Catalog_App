@@ -1,10 +1,14 @@
 import 'package:firstapp/Widget/home_widgets/catalog_widget.dart';
+import 'package:firstapp/core/store.dart';
+import 'package:firstapp/models/cart_model.dart';
 import 'dart:convert';
 import 'package:firstapp/models/homecontent.dart';
 import 'package:firstapp/utility/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 // import 'home_widgets/catalog_widget.dart';
 
@@ -14,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";
   @override
   void initState() {
     // TODO: implement initState
@@ -25,6 +30,9 @@ class _HomePageState extends State<HomePage> {
     await Future.delayed(Duration(seconds: 2));
     final catalogJson =
         await rootBundle.loadString("Assets/files/catalog.json");
+
+    // final Response = await http.get(Uri.parse(url));
+    // final catalogJson = response.body;
     final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
     CatalogModel.items = List.from(productsData)
@@ -35,15 +43,27 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
         backgroundColor: Colors.yellow[30],
         // backgroundColor: Theme.of(context).canvasColor,
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.blue.shade900,
-            onPressed: () {
-              Navigator.pushNamed(context, MyRoutes.cartRoute);
-            },
-            child: Icon(CupertinoIcons.cart)),
+
+        floatingActionButton: VxBuilder(
+          mutations: {AddMutation, RemoveMutation},
+          builder: (context, store, status) => FloatingActionButton(
+                  backgroundColor: Colors.blue.shade900,
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoutes.cartRoute);
+                  },
+                  child: Icon(
+                    CupertinoIcons.cart,
+                  ))
+              .badge(
+                  color: Colors.red.shade300,
+                  count: _cart.items.length,
+                  size: 20,
+                  textStyle: TextStyle(fontWeight: FontWeight.bold)),
+        ),
 
         // ignore: avoid_unnecessary_containers
         body: SafeArea(
